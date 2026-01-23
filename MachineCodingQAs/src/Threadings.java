@@ -1,3 +1,4 @@
+import java.util.concurrent.*;
 class Bank{
     private int balance=0;
 
@@ -74,34 +75,60 @@ class Consumer extends  Thread{
     }
 }
 
+
+
+
+
 public class Threadings {
     public static void main(String[] args){
 
-        Bank b = new Bank();
-        Worker w1 = new Worker(b); // Thread is created..
-        Worker w2 = new Worker(b);
-        w1.start(); //thread started..
-        w2.start();
-        try{
-            w1.join();
-            w2.join(); //running concurrently one after another not at that same time on the shared resoruce
+//        Bank b = new Bank();
+//        Worker w1 = new Worker(b); // Thread is created..
+//        Worker w2 = new Worker(b);
+//        w1.start(); //thread started..
+//        w2.start();
+//        try{
+//            w1.join();
+//            w2.join(); //running concurrently one after another not at that same time on the shared resoruce
+//        }
+//        catch(InterruptedException e){
+//            System.out.println(e);
+//        }
+//        System.out.println("count is : "+b.getBalance());
+//
+//
+//        resource r = new resource();
+//        Producer p = new Producer(r);
+//        Consumer c = new Consumer(r);
+//
+//        p.start();
+//        c.start();
+
+
+        //Executor Framework , working of callable and future
+
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+
+        // Define a task using Callable
+        Callable<Integer> task =  () ->   {
+            System.out.println("thread is calculating");
+            Thread.sleep(1000);
+            return 42;
+        };
+
+        //Submit the task and get a Future
+        System.out.println("Submitting the task");
+        Future<Integer> future = executor.submit(task);
+
+        System.out.println("Main thread is free to do other things!");
+
+        try {
+            Integer result = future.get();
+        System.out.println("Result received: " + result);
         }
-        catch(InterruptedException e){
-            System.out.println(e);
-        }
-        System.out.println("count is : "+b.getBalance());
+        catch (InterruptedException | ExecutionException e){}
 
-
-        resource r = new resource();
-        Producer p = new Producer(r);
-        Consumer c = new Consumer(r);
-
-        p.start();
-        c.start();
-
-
-
-
-
+        //Shutdown
+        executor.shutdown();
     }
 }
