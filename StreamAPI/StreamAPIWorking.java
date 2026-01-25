@@ -1,6 +1,6 @@
 import java.util.*;
 import java.util.stream.*;
-
+import java.util.Optional;
 class Employee {
     String name;
     String dept;
@@ -55,7 +55,8 @@ public class StreamAPIWorking {
                 new Employee("Charlie", "Tech", 40000),
                 new Employee("Kiran", "Tech", 80000),
                 new Employee("Raju", "Tech", 60000),
-                new Employee("Mohan", "Tech", 70000)
+                new Employee("Mohan", "Tech", 70000),
+                new Employee("", "Tech", 80000)
         );
 
 
@@ -87,5 +88,21 @@ public class StreamAPIWorking {
                 .mapToDouble(Product::getPrice)
                 .sum();
         System.out.println("Total Electronic Stock Value: $" + totalValue);
+
+
+        //Optional API usage
+
+
+        List<String> techstars1 = emps.stream()
+                .filter(e -> e.getDept().equals("Tech"))
+                .filter(e -> e.getSalary() > 50000)
+                // Use Optional inside map to handle empty/null names
+                .map(e -> Optional.ofNullable(e.getName()).orElse("Unknown"))
+                .filter(name -> !name.isEmpty()) // Filter out the empty strings you found
+                .sorted()
+                .collect(Collectors.toList());
+
+        System.out.println(techstars1);
+
     }
 }
