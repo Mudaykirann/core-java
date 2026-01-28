@@ -1,4 +1,24 @@
 import java.io.*;
+import java.nio.ByteBuffer;
+
+class BufferDemo{
+    public void BufferMethod() {
+        ByteBuffer buffer = ByteBuffer.allocate(10);
+
+
+        buffer.put((byte) 10);
+        buffer.put((byte) 20);
+        buffer.put((byte) 30);
+        buffer.put((byte) 40);
+
+        buffer.flip();
+
+        while(buffer.hasRemaining()){
+            System.out.println(buffer.get());
+        }
+        buffer.clear();
+    }
+}
 
 class UserAccount implements Serializable {
     private static final long serialVersionUID = 1L; // Recommended
@@ -20,7 +40,7 @@ public class SerializationExample {
         UserAccount user = new UserAccount("Kiran", "secret123", 50);
 
 
-        //Serialization ===> converting object into byte output stream --> writing
+        //Serialization ===> converting object in to byte output stream --> writing
         try{
             ObjectOutputStream oob = new ObjectOutputStream(new FileOutputStream(("user.ser")));
             oob.writeObject(user);
@@ -40,5 +60,7 @@ public class SerializationExample {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+        new BufferDemo().BufferMethod();
     }
 }
