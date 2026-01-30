@@ -20,22 +20,48 @@ class JDBCPractice01 {
         String url="jdbc:mysql://localhost:3306/employees";
         String user="root";
         String password="uday";
-        String query ="select * from employees where Number='555-1234'";
+
+        //Inserting an new empployee record
+        String query ="INSERT INTO employees (Name,Department,City,Number,Salary) VALUES (?,?,?,?,?)";
 
         // Modern driver name includes '.cj.'
         Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection c = DriverManager.getConnection(url,user,password);
-        Statement s = c.createStatement();
-        ResultSet rs = s.executeQuery(query);
+        try(Connection c = DriverManager.getConnection(url,user,password)){    
 
-        rs.next();
+        //Optimizing the 
+        PreparedStatement ps = c.prepareStatement(query);
+        //ResultSet rs = s.executeQuery(query);
 
-        String name = rs.getString("Salary");
 
-        System.out.println("Salary of Alice Smith is: " + name);
+        ps.setString(1, "Kiran Mangala");
+        ps.setString(2, "Developer");
+        ps.setString(3, "Hyderabad");   
+        ps.setString(4, "9988776655");
+        ps.setDouble(5, 25000.00);
 
-        s.close();
+        int rowsinserted = ps.executeUpdate();
+
+        if(rowsinserted > 0){
+            System.out.println("A new employee was inserted successfully!");
+        }
+
+
+
+
+        // while(rs.next()){
+        //     String Name = rs.getString("Name");
+        //     String dep = rs.getString("Department");
+        //     String City = rs.getString("City");
+        //     double sal = rs.getDouble("Salary");
+        //     System.out.println(Name + " - " + dep + " - " + City + " - " + sal);
+        // }
+
+        ps.close();
         c.close();
     }
+    catch(SQLException e){
+        e.printStackTrace();
+    }
+}
 }
 
