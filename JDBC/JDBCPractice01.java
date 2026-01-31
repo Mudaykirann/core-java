@@ -33,20 +33,42 @@ class JDBCPractice01 {
         //ResultSet rs = s.executeQuery(query);
 
 
-        ps.setString(1, "Kiran Mangala");
-        ps.setString(2, "Developer");
-        ps.setString(3, "Hyderabad");   
-        ps.setString(4, "9988776655");
-        ps.setDouble(5, 25000.00);
+        // ps.setString(1, "Kiran Mangala");
+        // ps.setString(2, "Developer");
+        // ps.setString(3, "Hyderabad");   
+        // ps.setString(4, "9988776655");
+        // ps.setDouble(5, 25000.00);
 
-        int rowsinserted = ps.executeUpdate();
 
-        if(rowsinserted > 0){
+
+        //Batch processing can also be done using addBatch() and executeBatch() methods
+        //Adding multiple records using batch processing
+        ps.setString(1, "Anil Kumar");
+        ps.setString(2, "Tester");
+        ps.setString(3, "Bangalore");
+        ps.setString(4, "8877665544");
+        ps.setDouble(5, 22000.00);
+        ps.addBatch();
+
+        ps.setString(1, "Sita Reddy");
+        ps.setString(2, "Manager");
+        ps.setString(3, "Chennai");
+        ps.setString(4, "7766554433");
+        ps.setDouble(5, 30000.00);
+        ps.addBatch();
+
+
+        // to execute the batch 
+        //ps.executeUpdate(): This is where the double-entry happens. This method executes the current state of the PreparedStatement. 
+        // Since "Sita Reddy" was the last set of values you bound to the ps object, 
+        // executeUpdate() runs that specific insert query one more time. which leads to the duplicate entry error.
+        //to avoid this we use executeBatch() method in the below specific way
+
+        int [] rowsInserted = ps.executeBatch();
+
+        if(rowsInserted.length > 0){
             System.out.println("A new employee was inserted successfully!");
         }
-
-
-
 
         // while(rs.next()){
         //     String Name = rs.getString("Name");
