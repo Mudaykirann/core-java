@@ -38,4 +38,9 @@ public class Alien {
     public void setAcolor(String acolor) {
         this.acolor = acolor;
     }
+
+    @Override
+    public String toString() {
+        return "Alien [id=" + aid + ", name=" + aname + ", color=" + acolor + "]";
+    }
 }
