@@ -2,8 +2,8 @@
     <session-factory>
         <property name="hibernate.onnection.drive_class">org.mysql.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/emp</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">uday</property>
+        <property name="hibernate.connection.username">DB_name</property>
+        <property name="hibernate.connection.password">DB_password</property>
 
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 
