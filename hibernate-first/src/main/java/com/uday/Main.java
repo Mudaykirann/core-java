@@ -52,28 +52,55 @@ public class Main {
 //                .buildSessionFactory();
 
 
+
+        /*
+        * I wil show you hoe caching works in Hibernate
+        * Without always hitting the database for the data we use cache
+        *  that too First level caching is default made by hibernate itself
+        *  second level caching must be done by us
+        *  when we execute two statements like get data -> first one is from database
+        *                                               -> second one is from the cache
+        *  now we'll see second level cache follow the below steps
+        * */
+
         SessionFactory factory = new Configuration()
                .addAnnotatedClass(com.uday.Laptop.class)
                .addAnnotatedClass(com.uday.Student.class)
                 .configure("hibernate.cfg.xml")
                 .buildSessionFactory();
 
+        // 2 different sessions to see the second level cache
+
         // 4. Open a Session (the interface to the database)
         Session session = factory.openSession();
-
         // 5. Transaction Management (Mandatory for DML like Insert/Update/Delete)
         Transaction t = session.beginTransaction();
+        Student retrievedStu = session.find(Student.class, 1);
+        System.out.println(retrievedStu.toString());
+        t.commit();
+        session.close();
 
-        try {
+
+
+        Session session1 = factory.openSession();
+        // 5. Transaction Management (Mandatory for DML like Insert/Update/Delete)
+        Transaction t1 = session.beginTransaction();
+        Student retrievedStu1 = session1.find(Student.class, 1);
+        System.out.println(retrievedStu1.toString());
+        t1.commit();
+        session1.close();
+
+
+    //    try {
+
             /* --- JPA COMPLIANT CRUD OPERATIONS --- */
 
             // CREATE: persist() makes the object managed and schedules it for insert
             //session.persist(emp);
 
-
             //for lotp and student calss
-            session.persist(l);
-            session.persist(s);
+            //session.persist(l);
+            //session.persist(s);
 
             // UPDATE: merge() is used to save changes to an existing record
             // session.merge(emp);
@@ -85,18 +112,27 @@ public class Main {
             // Employee retrievedEmp = session.find(Employee.class, 2408);
             // System.out.println(retrievedEmp);
 
-            // 6. Commit the changes to the database
-            t.commit();
-            System.out.println("Employee saved successfully!");
 
-        } catch (Exception ex) {
-            // Rollback if any error occurs to maintain data integrity
-            if (t != null) t.rollback();
-            ex.printStackTrace();
-        } finally {
-            // 7. Resource Cleanup: Close the session and factory to prevent memory leaks
-            session.close();
-            factory.close();
-        }
+
+            // getting the data from the database
+
+
+
+
+
+            // 6. Commit the changes to the database
+            //t.commit();
+            //System.out.println("Employee saved successfully!");
+
+//        } catch (Exception ex) {
+//            // Rollback if any error occurs to maintain data integrity
+//            if (t != null) t.rollback();
+//            ex.printStackTrace();
+//        } finally {
+//            // 7. Resource Cleanup: Close the session and factory to prevent memory leaks
+//            session.close();
+//            factory.close();
+//        }
+
     }
 }
