@@ -15,7 +15,7 @@ This project contains practical examples, exercises, and reference implementatio
 | `MachineCodingQAs/src` | Machine coding questions and solutions to improve problem solving |
 | `hibernate-first` | First projects/examples using Hibernate ORM |
 
-> All code is written using core Java concepts, cleanly structured to run in IDEs and command-line environments. :contentReference[oaicite:1]{index=1}
+> All code is written using core Java concepts, cleanly structured to run in IDEs and command-line environments
 
 ---
 
