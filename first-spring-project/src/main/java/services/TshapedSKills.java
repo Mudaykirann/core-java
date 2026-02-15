@@ -7,6 +7,7 @@ public class TshapedSKills {
 
     public TshapedSKills (ICourse c){
         super();
+        System.out.println("Dependency injection through constructor.");
         this.course = c;
     }
 
