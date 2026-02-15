@@ -5,9 +5,28 @@
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- Define a Bean -->
-    <bean id="java" class="services.Java"></bean>
+    <bean id="java" class="services.Java" primary="true"></bean>
     <bean id="sb" class="services.SpringBoot"></bean>
-    <bean id="ts" class="services.TshapedSKills">
-        <property ref="java" name="course"></property>
+    <!--
+        <bean id="ts" class="services.TshapedSKills">
+    -->
+
+        <!--
+            For Manual Injection of depency classess into the target class we use Auto Wiring with
+            auto-wire property
+        -->
+    <!-- byType means inject the type classes like Icourse type into the TshapedSKills sb,java  -->
+<!--    there were two dependcy classes spring might confuse which should i inject for this we use  primary property inside the dependcy classes-->
+<!--        by default this follows setter injection if we want constrcutor injection put autowire="constructor"-->
+
+        <bean id="ts" class="services.TshapedSKills" autowire="byType">
+
+
+
+
+        <!--  // for Setter Dependency Injection -->
+<!--            <property ref="java" name="course"></property>-->
+            <!-- for Constructor Dependency Injection -->
+<!--        <constructor-arg ref="java" name="course"></constructor-arg>-->
     </bean>
 </beans>
