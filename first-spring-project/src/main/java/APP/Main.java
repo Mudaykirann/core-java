@@ -11,17 +11,19 @@ public class Main {
         //applicationContext
         //Bean Factory
 
+        //example of eager initialization -- spring will create every bean you wrote wheter you use it or not in this appliation context
+
         ApplicationContext container = new ClassPathXmlApplicationContext("applicationconfig.xml");//activating the spring framework
 
 
-        TshapedSKills t = container.getBean(TshapedSKills.class); //give me the bean object of TshapedSkills class to collect in t;
-        boolean status = t.buyTheCourse(444.44);
-
-        //dependency injection is success by injecting the java class into the TshapedSkills class by the spring
-
-        if (status)
-            System.out.println("Course purchased successfully ");
-        else
-            System.out.println("Failed to get the course");
+//        TshapedSKills t = container.getBean(TshapedSKills.class); //give me the bean object of TshapedSkills class to collect in t;
+//        boolean status = t.buyTheCourse(444.44);
+//
+//        //dependency injection is success by injecting the java class into the TshapedSkills class by the spring
+//
+//        if (status)
+//            System.out.println("Course purchased successfully ");
+//        else
+//            System.out.println("Failed to get the course");
     }
 }
