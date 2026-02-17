@@ -1,0 +1,169 @@
+
+## 1️⃣ What is the Spring Bean Lifecycle?
+
+The **Spring Bean Lifecycle** describes the **sequence of steps** Spring follows from:
+
+* **Bean creation**
+* **Initialization**
+* **Usage**
+* **Destruction**
+
+---
+
+## 2️⃣ Bean Lifecycle Stages (Mapped to Your Code)
+
+### 1. Class Loading
+
+* JVM loads the `Greetings` class
+* No object created yet
+
+---
+
+### 2. Instance Creation (Object Instantiation)
+
+```java
+{
+    System.out.println("Java Block");
+}
+```
+
+* **Instance initializer block**
+* Executes **before the constructor**
+* Pure Java feature (not Spring-specific)
+
+---
+
+### 3. Constructor Execution
+
+```java
+public Greetings(){
+    System.out.println("Greetings bean is created.");
+}
+```
+
+* Spring creates the bean instance
+* Constructor is called
+* Dependencies are not fully ready yet
+
+---
+
+### 4. Dependency Injection (if any)
+
+* Spring injects required dependencies
+* Happens **after constructor**
+* (Not visible in your code, but logically present)
+
+---
+
+### 5. Post Initialization Callback
+
+```java
+@PostConstruct
+public void init(){
+    System.out.println("Bean init method");
+}
+```
+
+* Runs **after dependency injection**
+* Bean is now fully ready
+* Best place for:
+
+  * Resource initialization
+  * Validation logic
+  * Startup checks
+
+---
+
+### 6. Bean is Ready for Use
+
+```java
+public String generateWish(){
+    return "Good Night \n";
+}
+```
+
+* Business logic methods are called
+* Bean is actively used by the application
+
+---
+
+### 7. Pre-Destruction Callback
+
+```java
+@PreDestroy
+public void destroy(){
+    System.out.println("Bean is destroyed");
+}
+```
+
+* Runs when:
+
+  * Application context shuts down
+* Used for:
+
+  * Closing resources
+  * Cleanup logic
+  * Releasing connections
+
+---
+
+## 3️⃣ Execution Order (VERY IMPORTANT – Interview Favorite)
+
+```text
+1. Java Instance Initializer Block
+2. Constructor
+3. @PostConstruct method
+4. Business methods
+5. @PreDestroy method
+```
+
+---
+
+## 4️⃣ Bean Lifecycle Flow Diagram (Text-Based)
+
+```text
+JVM Loads Class
+       │
+       ▼
+Instance Initializer Block
+("Java Block")
+       │
+       ▼
+Constructor
+("Greetings bean is created.")
+       │
+       ▼
+Dependency Injection
+       │
+       ▼
+@PostConstruct
+("Bean init method")
+       │
+       ▼
+Bean Ready for Use
+(generateWish())
+       │
+       ▼
+Application Shutdown
+       │
+       ▼
+@PreDestroy
+("Bean is destroyed")
+```
+
+---
+
+## 5️⃣ Key Interview Points to Say Confidently
+
+* `@Service` makes the class a **Spring-managed bean**
+* Instance initializer block runs **before constructor**
+* `@PostConstruct` runs **after dependency injection**
+* `@PreDestroy` runs **before bean removal**
+* Bean lifecycle is **container-managed**
+* Lifecycle callbacks help manage **resources cleanly**
+
+---
+
+## 6️⃣ One-Line Interview Summary ⭐
+
+> “In Spring, a bean is created using the constructor, initialized using `@PostConstruct`, used during runtime, and destroyed using `@PreDestroy`, with Java initializer blocks running even before the constructor.”
