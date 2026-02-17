@@ -8,6 +8,8 @@ public class Main {
     public static void main(String[] args) {
 
 
+        //Spring porject with XML Approach
+
         //applicationContext
         //Bean Factory
 
