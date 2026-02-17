@@ -1,0 +1,150 @@
+# SPRING STEREOTYPE ANNOTATIONS – CLEAN NOTES
+
+1. Component and Stereotype Annotations
+
+---
+
+In Spring, stereotype annotations are used to mark classes as Spring-managed beans and to define their role in the application architecture.
+
+@Component
+
+* Base annotation
+* Marks a class as a Spring-managed bean
+* All other stereotype annotations are derived from this
+
+---
+
+2. Layer-Specific Stereotype Annotations
+
+---
+
+## Web / User Logic
+
+@Controller
+
+* Used in Spring MVC applications
+* Returns views (HTML, JSP, etc.)
+
+@RestController
+
+* Combination of @Controller and @ResponseBody
+* Used for REST APIs
+* Returns JSON or XML responses
+
+---
+
+## Business Logic
+
+@Service
+
+* Represents the service or business layer
+* Improves code readability and design
+* Commonly used with transactions and AOP
+
+---
+
+## Database / Persistence Logic
+
+@Repository
+
+* Represents the data access layer
+* Enables automatic exception translation
+* Converts database exceptions into Spring’s DataAccessException
+
+---
+
+## Configuration Logic
+
+@Configuration
+
+* Used for Java-based configuration
+* Contains @Bean methods
+* Ensures proper bean creation and management
+
+---
+
+3. Why They Are Called Stereotype Annotations
+
+---
+
+* All stereotype annotations internally include @Component
+* They describe the responsibility of a class
+* Help Spring apply cross-cutting concerns like AOP
+* Improve application structure and maintainability
+
+---
+
+4. Bean Lifecycle Rule
+
+---
+
+Without an annotation or explicit configuration, a class is NOT part of the Spring bean lifecycle.
+
+Spring manages only:
+
+* Classes discovered through component scanning
+* Classes registered using @Bean
+
+---
+
+5. Using @Bean Annotation
+
+---
+
+Use @Bean when:
+
+* A class does not have any Spring annotation
+* The class comes from a third-party library
+* You cannot modify the source code
+
+@Bean is defined inside a @Configuration class and returns an object that Spring manages as a bean.
+
+---
+
+6. @Component vs @Bean
+
+---
+
+@Component
+
+* Applied at class level
+* Detected through component scanning
+* Commonly used for application classes
+
+@Bean
+
+* Applied at method level
+* Explicitly defined in configuration
+* Commonly used for external or non-annotated classes
+
+---
+
+7. Summary
+
+---
+
+* @Component, @Controller, @Service, @Repository, and @Configuration are stereotype annotations
+* All stereotypes are specialized forms of @Component
+* Without annotation or @Bean, a class is not managed by Spring
+* Use stereotype annotations for your own classes
+* Use @Bean for third-party or non-annotated classes
+
+
+| Feature     | @Component          | @Bean                      |
+| ----------- | ------------------- | -------------------------- |
+| Level       | Class               | Method                     |
+| Discovery   | Component scanning  | Explicit configuration     |
+| Typical Use | Application classes | External / library classes |
+| Flexibility | Less                | More control               |
+
+
+
+One-Line Summary (Good for Interviews)
+
+Stereotype annotations define what a class does in the Spring architecture.
+
+@Component is the base annotation.
+
+@Controller, @Service, @Repository, and @Configuration are layer-specific stereotypes.
+
+Without annotation or @Bean, Spring does not manage the class.
