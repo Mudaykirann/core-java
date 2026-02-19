@@ -14,6 +14,7 @@ This project contains practical examples, exercises, and reference implementatio
 | `StreamAPI` | Demonstrations of Java Stream API usage for functional and data-oriented tasks |
 | `MachineCodingQAs/src` | Machine coding questions and solutions to improve problem solving |
 | `hibernate-first` | First projects/examples using Hibernate ORM |
+| `com.maven.tutorial` | First projects/examples using Maven tool |
 
 > All code is written using core Java concepts, cleanly structured to run in IDEs and command-line environments
 
