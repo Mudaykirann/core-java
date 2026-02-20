@@ -15,6 +15,8 @@ This project contains practical examples, exercises, and reference implementatio
 | `MachineCodingQAs/src` | Machine coding questions and solutions to improve problem solving |
 | `hibernate-first` | First projects/examples using Hibernate ORM |
 | `com.maven.tutorial` | First projects/examples using Maven tool |
+| `first-spring-project` | First projects/examples using spring |
+
 
 > All code is written using core Java concepts, cleanly structured to run in IDEs and command-line environments
 
