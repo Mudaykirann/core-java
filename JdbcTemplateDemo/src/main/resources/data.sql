@@ -1,0 +1,1 @@
+insert into barber values (115,"Mangala","Tadiptri");
