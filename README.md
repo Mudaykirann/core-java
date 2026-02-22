@@ -17,6 +17,7 @@ This project contains practical examples, exercises, and reference implementatio
 | `com.maven.tutorial` | First projects/examples using Maven tool |
 | `first-spring-project` | First projects/examples using spring |
 | `springbootApp1` | First projects/examples using springBoot |
+| `JdbcTemplateDemo` | JdbcTemplate CRUD in Springboot |
 
 
 > All code is written using core Java concepts, cleanly structured to run in IDEs and command-line environments
