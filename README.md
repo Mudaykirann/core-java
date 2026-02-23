@@ -1,7 +1,7 @@
 # Core Java Repository
 
 Welcome to the **Core Java** repository!  
-This project contains practical examples, exercises, and reference implementations of core Java concepts and real-world problems, structured into multiple modules. It’s designed to help learners strengthen their understanding of Java fundamentals and common programming tasks.
+This project contains practical examples, exercises, and reference implementations of core Java concepts and real-world problems, structured into multiple modules. It’s designed to help learners strengthen their understanding of Java fundamentals and common programming tasks...
 
 ---
 
