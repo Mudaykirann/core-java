@@ -18,6 +18,7 @@ This project contains practical examples, exercises, and reference implementatio
 | `first-spring-project` | First projects/examples using spring |
 | `springbootApp1` | First projects/examples using springBoot |
 | `JdbcTemplateDemo` | JdbcTemplate CRUD in Springboot |
+| `restapi` | REST API Implmentation in Springboot |
 
 
 > All code is written using core Java concepts, cleanly structured to run in IDEs and command-line environments
